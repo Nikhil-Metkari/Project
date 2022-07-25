@@ -81,7 +81,7 @@ public class ProductController {
        
     }
     
-    @PutMapping("/Ecommerce/Products/update/byproductid/")
+    @PostMapping("/Ecommerce/Products/update/byproductid/")
     public Product updateProduct(@RequestBody Product product)
     {
     	Optional<Product> po = productrepo.findById(product.getProductid());
@@ -126,7 +126,7 @@ public class ProductController {
   		}
     }
     
-    @DeleteMapping("/Ecommerce/Products/delete/byproductid/")
+    @PostMapping("/Ecommerce/Products/delete/byproductid/")
     public String deleteProduct(@RequestBody Product product)
     {
     	if(!productrepo.findById(product.getProductid()).isEmpty())

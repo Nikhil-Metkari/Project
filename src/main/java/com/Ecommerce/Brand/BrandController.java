@@ -85,7 +85,7 @@ public class BrandController {
     
 
   
-  @PutMapping("/Ecommerce/Brands/Update/")
+  @PostMapping("/Ecommerce/Brands/Update/")
   public Brand updateBrand(@RequestBody Brand brand)
   {
 	  Optional<Brand> b = brandrepo.findById(brand.getBrandid());
@@ -135,7 +135,7 @@ public class BrandController {
  }
   
 
-	@DeleteMapping("/Ecommerce/Brands/deletebyid/")
+	@PostMapping("/Ecommerce/Brands/deletebyid/")
 		public String deleteCategoryById(@RequestBody Brand brand)
 		{
 		
