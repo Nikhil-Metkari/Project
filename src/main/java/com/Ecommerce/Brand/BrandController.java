@@ -106,19 +106,6 @@ public class BrandController {
 	  }
   }
   
-
-  @GetMapping("/Ecommerce/Category/byid/{id}")
-  public List getCategoryById(@PathVariable int id,Brand brand){
-
-  		if(!categoryRepo.existsById(brand.getCategoryid())) {
-  			log.warn("Wrong Category id");
-  	        throw new InvalidEntry("Wrong category id passed");
-  		}
-  		else {
-  			return brandservice.getCategoryById(brand);
-  		}
-  	}
-  
   @GetMapping("/Ecommerce/Products/list/bybrandname/{brandname}")
   public List<Product> getProductByBrandname(@PathVariable String brandname)
   {
@@ -133,17 +120,31 @@ public class BrandController {
 			throw new InvalidEntry("Wrong  brand name passed");
 		}
  }
+
+	@GetMapping ("/Ecommerce/Products/list/bybrandid/{brandid}")
+	public List<Product> getProductByBrandId(@PathVariable int brandid)
+	{
+		System.out.println(brandid);
+		if(brandrepo.findById(brandid).isEmpty())
+		{
+			log.warn("Wrong Brand id");
+			throw new InvalidEntry("Wrong  brand id passed");
+		}
+		else {
+			return productservice.getProductByBrandId(brandid);
+		}
+	}
   
 
 	@PostMapping("/Ecommerce/Brands/deletebyid/")
-		public String deleteCategoryById(@RequestBody Brand brand)
+		public String deleteBrandById(@RequestBody Brand brand)
 		{
 		
 		if(brandrepo.existsById(brand.getBrandid()))
 				{
 				if(productrepo.findAllByBrandid(brand.getBrandid()).isEmpty())
 				{
-					brandservice.deleteCategoryById(brand.getBrandid());
+					brandservice.deleteBrandById(brand.getBrandid());
 					return  "Deleted";
 				}
 				else {

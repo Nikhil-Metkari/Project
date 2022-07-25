@@ -86,9 +86,8 @@ public class BrandService {
 
 
 
-	public void deleteCategoryById(int brandid) {
+	public void deleteBrandById(int brandid) {
 		 brandrepo.deleteById(brandid);
-		
 	}
 
 //	public List<Product> findBybrandname(String brandname) {

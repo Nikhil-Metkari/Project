@@ -110,22 +110,6 @@ public class ProductController {
     }
 }
     
-    
-    
-    @GetMapping ("/Ecommerce/Products/list/bybrandid/{brandid}")
-    public List<Product> getProductByBrandId(@PathVariable int brandid)
-    {
-    	System.out.println(brandid);
-    	if(brandrepo.findById(brandid).isEmpty())
-    	{
-    		log.warn("Wrong Brand id");
-  	        throw new InvalidEntry("Wrong  brand id passed");
-  		}
-  		else {
-  			return productservice.getProductByBrandId(brandid);
-  		}
-    }
-    
     @PostMapping("/Ecommerce/Products/delete/byproductid/")
     public String deleteProduct(@RequestBody Product product)
     {
