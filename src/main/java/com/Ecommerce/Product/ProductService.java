@@ -10,18 +10,18 @@ import java.util.Optional;
 @Service
 public class ProductService {
 
-    @Autowired
-    private ProductRepo productrepo;
+	@Autowired
+	private ProductRepo productrepo;
 
-    public List<Product> getProduct() {
-        return productrepo.findAll();
+	public List<Product> getProduct() {
+		return productrepo.findAll();
 
-    }
+	}
 
-    public Product addProduct(Product product) {
+	public Product addProduct(Product product) {
 
-        return productrepo.save(product);
-    }
+		return productrepo.save(product);
+	}
 
 
 
@@ -40,10 +40,10 @@ public class ProductService {
 		return productrepo.findAllByCategoryid(categoryid);
 	}
 
-	public void deleteProduct(int id) {
-		
-		 productrepo.deleteById(id);
-		
+
+	public void deleteProduct(int productid) {
+		productrepo.deleteById(productid);
+
 	}
 
 

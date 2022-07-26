@@ -20,29 +20,29 @@ import java.util.Optional;
 @Service
 public class BrandService {
 	Logger log = LoggerFactory.getLogger(CategoryService.class);
-	
-    @Autowired
-   private BrandRepo brandrepo;
-    
-    @Autowired
-   private CategoryRepo catrgoryRepo;
-    
-    @Autowired
-    private ProductRepo productRepo;
-    
-    @Autowired
-    private ProductService productservice;
-    
-    public List<Brand> getBrand() {
-        return brandrepo.findAll();
-    }
+
+	@Autowired
+	private BrandRepo brandrepo;
+
+	@Autowired
+	private CategoryRepo catrgoryRepo;
+
+	@Autowired
+	private ProductRepo productRepo;
+
+	@Autowired
+	private ProductService productservice;
+
+	public List<Brand> getBrand() {
+		return brandrepo.findAll();
+	}
 
 	public Brand addBrand(Brand brand) {
 		// TODO Auto-generated method stub
 		return brandrepo.save(brand);
 	}
-   
-    
+
+
 //    public Brand getBrandById(int id) {
 //    	Brand c_id = brandrepo.findById(id).get();
 //    	return c_id;
@@ -75,7 +75,7 @@ public class BrandService {
 	public List getCategoryById(Brand brand) {
 		List<Brand> list = brandrepo.findAll();
 		return list;
-				
+
 	}
 
 	public List<Object> getProductByCategoryId(int categoryid) {
@@ -83,9 +83,11 @@ public class BrandService {
 		return brandrepo.findAllByCategoryid(categoryid);
 	}
 
-	public void deleteCategoryById(int id) {
-		brandrepo.deleteById(id);
-		
+
+
+
+	public void deleteBrandById(int brandid) {
+		brandrepo.deleteById(brandid);
 	}
 
 //	public List<Product> findBybrandname(String brandname) {
@@ -94,5 +96,5 @@ public class BrandService {
 //		return productRepo.findAllByBrandid(brandrepo.findBybrandname(brandname).getCategoryid());
 //	}
 
-	
+
 }

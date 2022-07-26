@@ -15,7 +15,7 @@ public class CategoryService {
 
     @Autowired
     private CategoryRepo categoryRepo;
-    
+
     @Autowired
     private BrandRepo brandrepo;
 
@@ -27,13 +27,12 @@ public class CategoryService {
         return categoryRepo.save(category);
     }
 
+    public void deleteCategoryById(int categoryid) {
+        categoryRepo.deleteById(categoryid);
 
-    public void deleteCategoryById(int id) {
-        categoryRepo.deleteById(id);
- 
     }
-    
-    
+
+
 }
 
 

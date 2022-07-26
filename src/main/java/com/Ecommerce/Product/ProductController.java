@@ -24,127 +24,111 @@ import java.util.Optional;
 @RestController
 public class ProductController {
 
-    @Autowired
-   private ProductService productservice;
-    
-    Logger log = LoggerFactory.getLogger(CategoryService.class);
-    
-    @Autowired
-    private ProductRepo productrepo;
-    
-    @Autowired
-    private BrandRepo brandrepo;
+	@Autowired
+	private ProductService productservice;
 
-    @Autowired
-    private CategoryRepo categoryRepo;
-    
+	Logger log = LoggerFactory.getLogger(CategoryService.class);
 
-    @GetMapping("/Ecommerce/Products/all")
-    public List<Product> getProduct()
-    {
-    	List<Product> list = productservice.getProduct();
-        if(list.isEmpty())
-    	{
-    		log.warn("List is empty");
-    		throw new InvalidEntry ("Given List is empty"); 
-    	}
-        return list;
-        
-    }
+	@Autowired
+	private ProductRepo productrepo;
 
-    @PostMapping("/Ecommerce/Products/add")
-    public Product addProduct(@RequestBody Product product)
-    {
-    	
-    	if(categoryRepo.existsById(product.getCategoryid()))
-    	{
-    		if(brandrepo.existsById(product.getBrandid()))
-    		{
-    			if(!productrepo.existsById(product.getProductid())) {
-    			return  productservice.addProduct(product);
-    			}
-    			else {
-    				log.warn("Passed product id is exists enter another product id .");
-        			throw new  InvalidEntry("Passed product id is exists enter another nummber .");
-    			}
-    		}
-    		else {
-    			log.warn("Wrong Brand id passsed.");
-    			throw new  InvalidEntry("Wrong Brand id passsed.");
-    			
-    		}
-    	}
-    	else {
-    		log.warn("Wrong Category id passsed.");
-			throw new  InvalidEntry("Wrong Category id passsed.");
-    	}
-       
-    }
-    
-    @PostMapping("/Ecommerce/Products/update/byproductid/")
-    public Product updateProduct(@RequestBody Product product)
-    {
-    	Optional<Product> po = productrepo.findById(product.getProductid());
-    	if(po.isPresent())
-    	{
-    	if(!categoryRepo.existsById(product.getCategoryid()))
-    	{
-    		log.warn("Category ID  is not present");
-			throw new  InvalidEntry("Given Category ID  is not present.");
-    	}
-    	else
-    	{
-    		if(!brandrepo.existsById(product.getBrandid()))
-    		{
-    			log.warn("Wrong Brand id entered");
-    			throw new  InvalidEntry("Given Brand_ID is not present.");
-    		}
-    		else {
-    			return productservice.updateProduct(product);
-    		}
-    	}
-    	}
-    else {
-		log.warn("Product ID is not present");
-		throw new  InvalidEntry("Given Product ID  is not present.");
-    }
-}
-    
-    
-    
-    @GetMapping ("/Ecommerce/Products/list/bybrandid/{brandid}")
-    public List<Product> getProductByBrandId(@PathVariable int brandid)
-    {
-    	System.out.println(brandid);
-    	if(brandrepo.findById(brandid).isEmpty())
-    	{
-    		log.warn("Wrong Brand id");
-  	        throw new InvalidEntry("Wrong  brand id passed");
-  		}
-  		else {
-  			return productservice.getProductByBrandId(brandid);
-  		}
-    }
-    
-    @PostMapping("/Ecommerce/Products/delete/byproductid/")
-    public String deleteProduct(@RequestBody Product product)
-    {
-    	if(!productrepo.findById(product.getProductid()).isEmpty())
-    	{
-			 productservice.deleteProduct(product.getProductid());
-			 return "Deleted";
+	@Autowired
+	private BrandRepo brandrepo;
+
+	@Autowired
+	private CategoryRepo categoryRepo;
+
+
+	@GetMapping("/Ecommerce/Products/all")
+	public List<Product> getProduct()
+	{
+		List<Product> list = productservice.getProduct();
+		if(list.isEmpty())
+		{
+			log.warn("List is empty");
+			throw new InvalidEntry ("Given List is empty");
 		}
-    	else {
-    		log.warn("Wrong product id entered");
+		return list;
+
+	}
+
+	@PostMapping("/Ecommerce/Products/add")
+	public Product addProduct(@RequestBody Product product)
+	{
+
+		if(categoryRepo.existsById(product.getCategoryid()))
+		{
+			if(brandrepo.existsById(product.getBrandid()))
+			{
+				if(!productrepo.existsById(product.getProductid())) {
+					return  productservice.addProduct(product);
+				}
+				else {
+					log.warn("Passed product id is exists enter another product id .");
+					throw new  InvalidEntry("Passed product id is exists enter another nummber .");
+				}
+			}
+			else {
+				log.warn("Wrong Brand id passsed.");
+				throw new  InvalidEntry("Wrong Brand id passsed.");
+
+			}
+		}
+		else {
+			log.warn("Wrong Category id passsed.");
+			throw new  InvalidEntry("Wrong Category id passsed.");
+		}
+
+	}
+
+	@PostMapping("/Ecommerce/Products/update/byproductid/")
+	public Product updateProduct(@RequestBody Product product)
+	{
+		Optional<Product> po = productrepo.findById(product.getProductid());
+		if(po.isPresent())
+		{
+			if(!categoryRepo.existsById(product.getCategoryid()))
+			{
+				log.warn("Category ID  is not present");
+				throw new  InvalidEntry("Given Category ID  is not present.");
+			}
+			else
+			{
+				if(!brandrepo.existsById(product.getBrandid()))
+				{
+					log.warn("Wrong Brand id entered");
+					throw new  InvalidEntry("Given Brand_ID is not present.");
+				}
+				else {
+					return productservice.updateProduct(product);
+				}
+			}
+		}
+		else {
+			log.warn("Product ID is not present");
+			throw new  InvalidEntry("Given Product ID  is not present.");
+		}
+	}
+
+	@PostMapping("/Ecommerce/Products/delete/byproductid/")
+	public String deleteProduct(@RequestBody Product product)
+	{
+		if(!productrepo.findById(product.getProductid()).isEmpty())
+		{
+			productservice.deleteProduct(product.getProductid());
+			return "Deleted";
+		}
+		else {
+			log.warn("Wrong product id entered");
 			throw new InvalidEntry("Wrong product id passed");
-    	}
-   
-    }
-    
-    
-    
-    
-    
-    
-    
+		}
+
+	}
+
+
+
+
+
+
+
 }
