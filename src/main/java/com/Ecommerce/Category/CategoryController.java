@@ -1,7 +1,5 @@
 package com.Ecommerce.Category;
 
-
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +68,7 @@ public class CategoryController {
 		}
 	}
 
-	@PostMapping("/Ecommerce/Category/deletebyid/")
+	@DeleteMapping("/Ecommerce/Category/deletebyid/")
 	public String deleteCategoryById(@RequestBody Category category)
 	{
 		if(categoryRepo.existsById(category.getCategoryid()))
