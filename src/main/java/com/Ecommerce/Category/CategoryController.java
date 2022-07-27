@@ -70,7 +70,7 @@ public class CategoryController {
 		}
     }
 
-	@PostMapping("/Ecommerce/Category/deletebyid/")
+	@DeleteMapping("/Ecommerce/Category/deletebyid/")
 		public String deleteCategoryById(@RequestBody Category category)
 		{
 		if(categoryRepo.existsById(category.getCategoryid()))
