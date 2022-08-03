@@ -1,4 +1,4 @@
 FROM openjdk:11
 EXPOSE 8088
-ADD target/springboot-oracle-docker.jar springboot-oracle-docker.jar
-ENTRYPOINT ["java","-jar","/springboot-oracle-docker.jar"]
+ADD target/docker-oracle-docker.jar docker-oracle-docker.jar
+ENTRYPOINT ["java","-jar","/docker-oracle-docker.jar"]
