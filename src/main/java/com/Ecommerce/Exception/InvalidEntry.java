@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 
-import com.Ecommerce.Category.Category;
+import com.Ecommerce.Category.Model.Category;
 
 public class InvalidEntry extends RuntimeException{
 
